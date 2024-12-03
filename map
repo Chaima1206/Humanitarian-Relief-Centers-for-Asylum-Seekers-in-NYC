@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Humanitarian Relief Centers</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Humanitarian Relief Centers for Asylum Seekers in NYC</h1>
+    <div id="map"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZ2hhcnMxMjMiLCJhIjoiY200OG91MTh4MDF6aDJqc2ZqdGYzcnFlayJ9.skkf_R-gZl-b0uUtzHxysQ';
+        
+        // Initialize the map
+        const map = new mapboxgl.Map({
+            container: 'map', // ID of the container for the map
+            style: 'mapbox://styles/mapbox/streets-v12', // Style for the map
+            center: [-74.0315, 40.6989], // Coordinates of NYC
+            maxZoom: 16,
+            minZoom: 9,
+            zoom: 9.68
+        });
+
+        // Array of locations with descriptions
+        var locations = [
+            {
+                'title': 'Holiday Inn Manhattan - Financial District',
+                'description': '99 Washington Street, New York, NY 10006. Provides housing for asylum seekers with 492 rooms for adult families and single adult women.',
+                'coordinates': [-74.0111, 40.7074]
+            },
+            {
+                'title': 'Hotel The Watson',
+                'description': '156 8th Avenue, New York, NY 10011. Temporary shelter offering rooms for single adult families.',
+                'coordinates': [-73.9989, 40.7405]
+            },
+            {
+                'title': 'Stewart Hotel',
+                'description': '371 7th Avenue, New York, NY 10001. Relief center for asylum seekers, accommodating 600 rooms for families with children.',
+                'coordinates': [-73.9945, 40.7483]
+            },
+            {
+                'title': 'Hotel Wolcott',
+                'description': '4 West 31st Street, New York, NY 10001. Serving as emergency housing for newly arriving single adult women and families.',
+                'coordinates': [-73.9889, 40.7451]
+            },
+            {
+                'title': 'Milford Plaza',
+                'description': '700 8th Avenue, New York, NY 10036. Temporary housing center for asylum seekers, initially accommodating 200 families.',
+                'coordinates': [-73.9868, 40.7562]
+            },
+            {
+                'title': 'New York Manhattan Hotel',
+                'description': '48 W 32nd St, New York, NY 10001. Provides temporary accommodation for asylum seekers as they navigate the relocation process.',
+                'coordinates': [-73.9876, 40.7498]
+            },
+            {
+                'title': 'Wingate by Wyndham New York Midtown South/5th Ave',
+                'description': '140 W 31st St, New York, NY 10001. Offers temporary housing and services for asylum seekers in the city.',
+                'coordinates': [-73.9854, 40.7555]
+            },
+            {
+                'title': 'Brooklyn Cruise Terminal',
+                'description': '72 Bowne Street, Brooklyn, NY 11231. Repurposed for emergency shelter and providing support services for asylum seekers.',
+                'coordinates': [-74.0035, 40.6835]
+            },
+            {
+                'title': '455 Jefferson St',
+                'description': '455 Jefferson Street, Brooklyn, NY 11237. Emergency housing facility for asylum seekers and relocation services.',
+                'coordinates': [-73.9157, 40.7116]
+            },
+            {
+                'title': 'Candler Building',
+                'description': '220 Broadway, New York, NY 10038. Provides temporary housing for asylum seekers and various services.',
+                'coordinates': [-73.9976, 40.7127]
+            },
+            {
+                'title': 'Randall\'s Island',
+                'description': 'Randalls Island, New York, NY 10035. Location for temporary shelter and services for asylum seekers.',
+                'coordinates': [-73.9220, 40.7843]
+            },
+            {
+                'title': 'American Musical and Dramatic Academy',
+                'description': '211 West 61st Street, New York, NY 10023. Converted into a shelter offering asylum seekers housing and services.',
+                'coordinates': [-73.9893, 40.7724]
+            },
+            {
+                'title': '1760 3rd Ave',
+                'description': '1760 3rd Ave, New York, NY 10128. Emergency housing and services for asylum seekers are provided here.',
+                'coordinates': [-73.9542, 40.7859]
+            },
+            {
+                'title': '47 Hall St',
+                'description': '47 Hall St, Brooklyn, NY 11205. Temporary emergency housing and support for asylum seekers.',
+                'coordinates': [-73.9603, 40.6944]
+            },
+            {
+                'title': 'Creedmoor Psychiatric Center',
+                'description': '80-45 Winchester Blvd, Queens, NY 11004. Former psychiatric center, now providing housing and support services for asylum seekers.',
+                'coordinates': [-73.7555, 40.7380]
+            },
+            {
+                'title': '320 W 31st St',
+                'description': '320 W 31st St, New York, NY 10001. Temporary shelter for asylum seekers as part of the city\'s emergency response efforts.',
+                'coordinates': [-73.9939, 40.7463]
+            },
+            {
+                'title': 'Roosevelt Hotel Ticketing Center',
+                'description': '45 E 45th St, New York, NY 10017. This center is now serving asylum seekers in New York City by providing necessary services.',
+                'coordinates': [-73.9782, 40.7554]
+            }
+        ];
+
+        // Adding each location to the map with a marker
+        locations.forEach(function(location) {
+            var popup = new mapboxgl.Popup({ offset: 25 }) // Popup options
+                .setHTML('<h3>' + location.title + '</h3><p>' + location.description + '</p>');
+
+            new mapboxgl.Marker()
+                .setLngLat(location.coordinates)
+                .setPopup(popup) // Bind popup to marker
+                .addTo(map);
+        });
+    </script>
+</body>
+</html>
